@@ -4,7 +4,10 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/customer/management")
@@ -57,6 +60,29 @@ public class CustomerRest {
     @GetMapping("/get/by/surname")
     public List<Customer> getBySurname(@RequestParam("surname") String surname) {
         return customerMongoDao.searchCustomerWithLastName(surname);
+    }
+
+    @GetMapping("/agg/by/surname")
+    public List<Customer> aggBySurname(@RequestParam("surname") String surname) {
+        return customerMongoDao.aggregateWithMatch(surname);
+    }
+
+    @GetMapping("/agg/group")
+    public List<GroupHeight> aggGroup() {
+        return customerMongoDao.aggregateWithGroup();
+    }
+
+    @GetMapping("/agg/group2")
+    public Map<Long,String> aggGroup2() {
+        List<Object[]> objectsLoc = customerMongoDao.aggregateWithGroup2();
+        Map<Long,String> stringObjectMapLoc = new HashMap<>();
+        long counter = 1;
+        for (Object[] objectLoc : objectsLoc) {
+            stringObjectMapLoc.put(counter,
+                                   Arrays.toString(objectLoc));
+            counter++;
+        }
+        return stringObjectMapLoc;
     }
 
 }

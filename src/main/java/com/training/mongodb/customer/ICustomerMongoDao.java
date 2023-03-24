@@ -1,5 +1,6 @@
 package com.training.mongodb.customer;
 
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -18,5 +19,24 @@ public interface ICustomerMongoDao extends MongoRepository<Customer,String> {
 
     @Query(value = "{lastName: ?0}",fields = "{firstName : 1,lastName : 1}")
     List<Customer> searchCustomerWithLastName(String surname);
+
+
+    @Aggregation(pipeline = {
+            "{'$match': { 'last_name': ?0 }}",
+            "{'$sort': { 'firstName' : 1}}"
+    })
+    List<Customer> aggregateWithMatch(String lastName);
+
+    @Aggregation(pipeline = {
+            "{'$group': {'_id': '$height', 'total': {'$sum': 1},'avg_weight': {'$avg': '$weight'},'total_weight': {'$sum': '$weight'} }}",
+            "{'$sort': { '_id' : 1}}"
+    })
+    List<GroupHeight> aggregateWithGroup();
+
+    @Aggregation(pipeline = {
+            "{'$group': {'_id': '$height', 'total': {'$sum': 1},'avg_weight': {'$avg': '$weight'},'total_weight': {'$sum': '$weight'} }}",
+            "{'$sort': { '_id' : 1}}"
+    })
+    List<Object[]> aggregateWithGroup2();
 
 }

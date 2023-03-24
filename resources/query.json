@@ -1,0 +1,95 @@
+{
+    "height": {
+        "$gte": 199
+    }
+}
+
+{
+    "height": {
+        "$lte": 199
+    }
+}
+
+{
+    "height": {
+        "$eq": 199
+    }
+}
+
+{
+    "height": {
+        "$ne": 199
+    }
+}
+
+{
+    "firstName": {
+        "$in": [
+            "osman",
+            "ali"
+        ]
+    }
+}
+
+{
+    "firstName": {
+        "$nin": [
+            "osman",
+            "ali"
+        ]
+    }
+}
+
+
+{
+    "$and": [
+        {
+            "firstName": {
+                "$nin": [
+                    "osman",
+                    "ali"
+                ]
+            }
+        },
+        {
+            "firstName": {
+                "$exists": true
+            }
+        }
+    ]
+}
+
+{
+    "$or": [
+        {
+            "weight": {
+                "$gte": 70
+            }
+        },
+        {
+            "height": {
+                "$gte": 170
+            }
+        }
+    ]
+}
+
+{
+    "firstName": {
+        "$in": [
+            "osman",
+            "ali"
+        ]
+    }
+},
+{
+    "total": {
+        "$sum": [
+            "$height",
+            "$weight"
+        ]
+    },
+    "name" : "$firstName",
+    "firstName": 1,
+    "lastName": 1
+}

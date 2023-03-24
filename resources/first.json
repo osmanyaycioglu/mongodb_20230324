@@ -1,0 +1,65 @@
+
+{
+    "firstName" : "osman",
+    "lastName" : "yaycıoğlu",
+    "height" : 200,
+    "weight" : 90,
+    "currentAddress" : { // oneToOne
+        "city" : "istanbul",
+        "street" : "ataşehir",
+        "address" : "deneme sitesi 6.blok 11 no"
+    },
+    "nickNames" : ["osmen","osi","osy"], // oneToMany
+    "phones" : [ // oneToMany
+        {
+            "name" : "ev",
+            "number" : "67435345"
+        },
+        {
+            "name" : "ofis",
+            "number" : "2837439247"
+        }
+    ]
+}
+
+customer
+{
+    _id : 5
+    "firstName" : "osman",
+    "lastName" : "yaycıoğlu",
+    "height" : 200,
+    "weight" : 90,
+    "addressId" : 1
+    "nickNames" : ["osmen","osi","osy"], // oneToMany
+    "phones" : [ // oneToMany
+        {
+            "name" : "ev",
+            "number" : "67435345"
+        },
+        {
+            "name" : "ofis",
+            "number" : "2837439247"
+        }
+    ]
+}
+
+currentAddress  
+{ 
+    "_id" : 1 
+    "city" : "istanbul",
+    "street" : "ataşehir",
+    "address" : "deneme sitesi 6.blok 11 no"
+}
+
+
+{
+    "firstName" : "nil",
+    "lastName" : "yaycıoğlu",
+    "height" : 177,
+    "weight" : 65,
+    "currentAddress" : {
+        "city" : "istanbul",
+        "street" : "ataşehir",
+        "address" : "deneme sitesi 6.blok 11 no"
+    }
+}
